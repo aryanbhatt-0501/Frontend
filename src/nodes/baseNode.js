@@ -3,6 +3,7 @@ import { Handle } from 'reactflow';
 export const BaseNode = ({ 
   id, 
   title, 
+  subtitle,
   fields = [], 
   handles = [] 
 }) => {
@@ -11,13 +12,16 @@ export const BaseNode = ({
       <div>
         <span>{title}</span>
       </div>
-      {fields.map(({ label, value, onChange, type = "text" }, index) => (
+      <div>
+        <span>{subtitle && subtitle}</span>
+      </div>
+      {fields.map(({ label, value, onChange, type = "text", options }, index) => (
         <div key={index}>
           <label>
             {label}:
             {type === 'select' ? (
               <select value={value} onChange={onChange}>
-                {onChange.options.map((option, idx) => (
+                {options?.map((option, idx) => (
                   <option key={idx} value={option}>
                     {option}
                   </option>
